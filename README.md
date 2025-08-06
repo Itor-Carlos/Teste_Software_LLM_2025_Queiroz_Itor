@@ -1,6 +1,6 @@
-**Teste de Vulnerabilidade com LLM**
+# Teste de Vulnerabilidade com LLM
 
-# Participantes da equipe:
+**Participantes da equipe:**
 
 - Heitor Saulo Dantas Santos
 - Itor Carlos Souza Queiroz
