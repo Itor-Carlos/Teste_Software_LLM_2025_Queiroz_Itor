@@ -2,11 +2,11 @@
 
 # Participantes da equipe:
 
-Heitor Saulo Dantas Santos
-Itor Carlos Souza Queiroz
-Lanna Luara Novaes Silva
-Lavínia Louise Rosa Santos
-Rômulo Menezes De Santana
+- Heitor Saulo Dantas Santos
+- Itor Carlos Souza Queiroz
+- Lanna Luara Novaes Silva
+- Lavínia Louise Rosa Santos
+- Rômulo Menezes De Santana
 
 ---
 
@@ -34,8 +34,7 @@ Na biblioteca Bouncy Castle (BC), uma coleção de APIs do Java usadas em cripto
 
 ## Execução
 
- ```bash
-mvn clean test
+`mvn clean test`
 
 
 
