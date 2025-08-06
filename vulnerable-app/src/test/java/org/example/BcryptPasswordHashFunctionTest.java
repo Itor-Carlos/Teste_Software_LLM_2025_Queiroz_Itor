@@ -16,7 +16,7 @@ public class BcryptPasswordHashFunctionTest {
         SecureRandom random = new SecureRandom();
         BcryptPasswordHashFunction passwordChecker = new BcryptPasswordHashFunction();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             byte[] salt = new byte[16];
             random.nextBytes(salt);
 
@@ -33,7 +33,7 @@ public class BcryptPasswordHashFunctionTest {
             boolean result = passwordChecker.check(passwordHash, incorrectPassword);
 
             assertFalse(result,
-                "A senha incorreta foi aceita! Isso indica possível vulnerabilidade (CVE-2020-28052)");
+                "A senha incorreta foi aceita! Isso indica vulnerabilidade (CVE-2020-28052)");
         }
     }
 }
