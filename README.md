@@ -40,8 +40,9 @@ Esta aplicação utiliza um prompt enviado à interface web do ChatGPT para gera
 
 *Execução:*
 
-bash
+```bash
 mvn clean test
+```
 
 ### 2. *Aplicação com uso da API do ChatGPT*
 
@@ -59,9 +60,12 @@ Esta aplicação envia o código cliente e um prompt estruturado diretamente par
   Arquivo de teste gerado automaticamente pela API do ChatGPT com base no `prompt.txt`.
 
 *Execução:*
+
 Primeiro configure a variável de ambiente com a sua chave da API do OpenAI
+```bash
 mvn compile exec:java -Dexec.mainClass="org.example.GeradorDeTestes"
 mvn clean test
+```
 
 
 
