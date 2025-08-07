@@ -1,33 +1,3 @@
-####### PRIMEIRO PROMPT ###########
-
-Write a JUnit test for function: check in "CLIENT CODE". The test should verify whether the function check is affected by the vulnerability: CVE-2020-28052, or affected by vulnerable APIs: [OpenBSDBCrypt.checkPassword]. Mimic the test function "TEST FUNCTION:" performTest I provide to generate the input in your test. For the provided code "CLIENT CODE", mock the classes and functions that are not Java SE APIs and have no definition provided. TEST FUNCTION: ``` Java @Test public void performTest() throws Exception {
-    // Listing 1 from the sources demonstrates the proof-of-concept exploit for BC 1.65 & 1.66 [4, 5]
-    int costFactor = 4;
-    SecureRandom random = new SecureRandom();
-    byte[] salt = new byte[16];
-    for (int i = 0; i < 100; i++) {
-        random.nextBytes(salt);
-        final String tokenString = OpenBSDBCrypt.generate("test-token".toCharArray(), salt, costFactor);
-        // Assertion 1: Should pass if the correct password is used
-        assertTrue(OpenBSDBCrypt.checkPassword(tokenString, "test-token".toCharArray()));
-        // Assertion 2: A safe BC version should pass this assertion. A vulnerable BC version (1.65/1.66) should fail.
-        // It treats unmatched passwords as matching ones [4, 5].
-        assertTrue(!OpenBSDBCrypt.checkPassword(tokenString, "wrong-token".toCharArray()));
-    }
-} ``` CLIENT CODE: ``` java package org.example;
-
-import org.bouncycastle.crypto.generators.OpenBSDBCrypt;
-
-public class BcryptPasswordHashFunction {
-    public boolean check(String passwordHash, String password) {
-        // This method calls the vulnerable API OpenBSDBCrypt.checkPassword() [7]
-        return OpenBSDBCrypt.checkPassword(passwordHash, password.toCharArray());
-    }
-} ```
-
-
-
-
 ######### SEGUNDO PROMPT   ###########
 
 # Write a JUnit test for the function: check in "CLIENT CODE". The test should verify whether the function check is affected by the vulnerability: CVE-2020-28052, or affected by vulnerable APIs: [OpenBSDBCrypt.checkPassword]. Mimic the test function "TEST FUNCTION:" performTest I provide to generate the input in your test. For the provided code "CLIENT CODE", mock the classes and functions that are not Java SE APIs and have no definition provided.

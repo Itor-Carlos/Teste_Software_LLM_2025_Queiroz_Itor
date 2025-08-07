@@ -1,0 +1,24 @@
+# Diretórios de build do Maven
+/target/
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configurações locais do VS Code
+.vscode/
+
+# Arquivos gerados pelo Maven Wrapper
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# Outros
+dependency-reduced-pom.xml

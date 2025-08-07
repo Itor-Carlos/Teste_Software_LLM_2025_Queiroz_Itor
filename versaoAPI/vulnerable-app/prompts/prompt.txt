@@ -1,0 +1,30 @@
+Write a JUnit test for the function: check in "CLIENT CODE". The test should verify whether the function check is affected by the vulnerability: CVE-2020-28052, or affected by vulnerable APIs: [OpenBSDBCrypt.checkPassword]. Mimic the test function "TEST FUNCTION:" performTest I provide to generate the input in your test. For the provided code "CLIENT CODE", mock the classes and functions that are not Java SE APIs and have no definition provided.
+
+TEST FUNCTION:
+``` Java
+@Test
+public void performTest() throws Exception {
+    int costFactor = 4;
+    SecureRandom random = new SecureRandom();
+    byte[] salt = new byte[16]; 
+    for (int i = 0; i < 100; i++) {
+        random.nextBytes(salt);
+        final String tokenString = OpenBSDBCrypt.generate("test-token".toCharArray(), salt, costFactor);
+        assertTrue(OpenBSDBCrypt.checkPassword(tokenString, "test-token".toCharArray()));
+        /* Uma versão segura de BC deveria passar a seguinte asserção. Uma versão vulnerável de BC deveria falhar
+        a asserção, pois trata senhas não correspondentes como correspondentes. */
+        assertTrue(!OpenBSDBCrypt.checkPassword(tokenString, "wrong-token".toCharArray()));
+    }
+}
+CLIENT CODE:
+``` java
+package org.example;
+import org.bouncycastle.crypto.generators.OpenBSDBCrypt;
+public class BcryptPasswordHashFunction {
+    // O método abaixo chama a API vulnerável, portanto pode ser afetado por CVE − 2020 − 28052.
+    @Override
+    public boolean check(String passwordHash, String password) {
+        // a chamada à API vulnerável
+        return OpenBSDBCrypt.checkPassword(passwordHash, password.toCharArray()); // metodo estatico
+    }
+}
