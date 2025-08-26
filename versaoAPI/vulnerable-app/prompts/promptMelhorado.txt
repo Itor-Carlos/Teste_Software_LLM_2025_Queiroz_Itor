@@ -1,0 +1,37 @@
+Write a JUnit test for the function: check in "CLIENT CODE". The test should verify whether 
+the function check is affected by the vulnerability: CVE-2020-28052, or affected by vulnerable
+APIs: [OpenBSDBCrypt.checkPassword]. Mimic the test function "TEST FUNCTION:" performTest I provide
+to generate the input in your test. For the provided code "CLIENT CODE", mock the classes and 
+functions that are not Java SE APIs and have no definition provided. Include informative assertion 
+messages that clearly indicate if the test fails due to CVE-2020-28052 or the vulnerable API.
+Return only the raw Java code, without explanations, comments, or markdown formatting. Remember 
+to add "package org.example;".
+
+TEST FUNCTION:
+``` Java
+@Test
+public void performTest() throws Exception {
+    int costFactor = 4;
+    SecureRandom random = new SecureRandom();
+    byte[] salt = new byte[16]; 
+    for (int i = 0; i < 100; i++) {
+        random.nextBytes(salt);
+        final String tokenString = OpenBSDBCrypt.generate("test-token".toCharArray(), salt, costFactor);
+        assertTrue(OpenBSDBCrypt.checkPassword(tokenString, "test-token".toCharArray()));
+        /* A secure version of BC should pass the following assertion. 
+        A vulnerable version of BC should fail the assertion, because it treats non-matching passwords as matching. */
+        assertTrue(!OpenBSDBCrypt.checkPassword(tokenString, "wrong-token".toCharArray()));
+    }
+}
+CLIENT CODE:
+``` java
+package org.example;
+import org.bouncycastle.crypto.generators.OpenBSDBCrypt;
+public class BcryptPasswordHashFunction {
+    // The method below calls the vulnerable API, therefore it may be affected by CVE − 2020 − 28052.
+    @Override
+    public boolean check(String passwordHash, String password) {
+        // call to the vulnerable API
+        return OpenBSDBCrypt.checkPassword(passwordHash, password.toCharArray()); // metodo estatico
+    }
+}
