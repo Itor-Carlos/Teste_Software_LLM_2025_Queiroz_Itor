@@ -46,16 +46,18 @@ mvn clean test
 
 ### 2. *Aplicação com uso da API do ChatGPT*
 
-Esta aplicação envia o código cliente e um prompt estruturado diretamente para a API oficial do ChatGPT, que retorna automaticamente um teste JUnit com o objetivo de verificar se o método está vulnerável à falha especificada (CVE-2020-28052).
+Esta aplicação envia o código cliente e um prompt estruturado diretamente para a API oficial do ChatGPT, que retorna automaticamente um teste JUnit com o objetivo de verificar se o método está vulnerável à falha especificada (CVE-2020-28052). Durante as execuçãos realizadas no desenvolvimento do código identificou-se que o modelo não estava gerando apenas um código pronto para ser executado, ele acrescentava explicações que impediam sua execução sem ajustes. Por conta disso, foi criado um novo arquivo de prompt que apenas acrescentava no original novos comandos que guiavam melhor o retorno do modelo e solicitavam ajustes para problemas recorrentes identificados.
 
 *Arquivos principais:*
 
 * src/main/java/org/example/BcryptPasswordHashFunction.java:
-  Contém o código cliente que chama a API vulnerável `OpenBSDBCrypt.checkPassword`.
+  Aplicação simples que invoca o método vulnerável.
 * src/main/java/org/example/GeradorDeTestes.java:
   Classe responsável por enviar o prompt e o código para a API do ChatGPT e gerar o arquivo de teste automaticamente.
 * prompts/prompt.txt:
-  Prompt estruturado enviado à API, contendo instruções e o código cliente.
+  Prompt utilizado na geração do teste conforme o artigo.
+* prompts/promptMelhorado.txt:
+  Prompt refinado e com acréscimo de informações pela equipe para melhor desempenho do modelo na geração do teste.
 * src/test/java/org/example/BcryptPasswordHashFunctionTest.java:
   Arquivo de teste gerado automaticamente pela API do ChatGPT com base no `prompt.txt`.
 
